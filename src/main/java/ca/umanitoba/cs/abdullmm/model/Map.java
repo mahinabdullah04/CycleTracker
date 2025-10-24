@@ -29,7 +29,7 @@ public class Map {
 
     }
     public void addObstacle(Obstacle obstacle){
-        obstacle.add(obstacle);
+        obstacles.add(obstacle);
     }
     public void removeObstacle(Obstacle obstacle){
         obstacles.remove(obstacle);
