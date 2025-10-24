@@ -55,7 +55,7 @@ classDiagram
          -GridPoint position
          -Dimension size
          -String name
-         +Obstacle(GridPoint position, Dimension size, String name)
+         +public Obstacle(String name, GridPoint position, Dimension size)
          +GridPoint getPosition()
          +Dimension getSize()
          +String getName()
@@ -77,7 +77,8 @@ classDiagram
          +boolean contains(GridPoint point)
      }
      note for Route "Invariant Properties:
-     * points != null or empty"
+     * points != null or empty
+     * name != null or empty"
      
      class Map{
          -Dimension dimension
@@ -103,7 +104,7 @@ classDiagram
          -double distance
          -int durationMinutes
          -String name
-         +Activity(Route route, Hear gearUsed, LocalDate date, double distance, int durationMinutes, String name)
+         +Activity(Route route, Gear gearUsed, LocalDate date, double distance, int durationMinutes, String name)
          +Route getRoute()
          +Gear getGearUsed()
          +LocalDate getDate()
@@ -117,7 +118,9 @@ classDiagram
      gearUsed != null 
      date != null 
      distance > 0 
-     durationMinutes > 0"
+     durationMinutes > 0
+     name != null or empty
+     route cannot be empty"
      
      class Gear{
         <<interface>>
@@ -138,8 +141,8 @@ classDiagram
         +int getNumberOfGears()
     }
     note for Bike "Invariants properties: 
-    name != null 
-    bikeType != null
+    name != null or empty
+    bikeType != null or empty
     numberOfGears > 0"
 
     class Helmet {
