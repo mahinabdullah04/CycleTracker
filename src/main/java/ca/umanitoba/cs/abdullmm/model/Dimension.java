@@ -13,6 +13,13 @@ public class Dimension {
         checkDimension();
     }
 
+    public int width(){
+        return width;
+    }
+    public int height(){
+        return height;
+    }
+
     private  void checkDimension(){
 
         Preconditions.checkArgument(width > 0, "Width must be positive");

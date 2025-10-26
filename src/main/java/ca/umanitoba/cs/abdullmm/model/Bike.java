@@ -28,7 +28,7 @@ public class Bike implements  Gear{
 
     @Override
     public String getDescription() {
-        return String.format("This is a %s named %s with %d gears.", bikeType, name, numberOfGears);
+        return String.format("This is a %s bike named %s with %d gears.", bikeType, name, numberOfGears);
     }
 
     private void checkBike(){

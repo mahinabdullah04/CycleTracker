@@ -21,6 +21,12 @@ public class Shoe implements  Gear{
     public String getType() {
         return "Shoe";
     }
+    public String getShoeType() {
+        return shoeType;
+    }
+    public String getSize() {
+        return size;
+    }
 
     @Override
     public String getDescription() {
