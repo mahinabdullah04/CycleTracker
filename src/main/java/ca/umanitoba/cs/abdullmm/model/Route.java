@@ -27,8 +27,8 @@ public class Route {
         points.add(point);
     }
 
-    public int getDistance(){
-        return points.size();
+    public double getDistance(){
+        return (double) points.size();
     }
 
     public boolean contains(GridPoint point){
