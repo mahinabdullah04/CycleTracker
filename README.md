@@ -48,37 +48,37 @@ java -cp target/classes ca.umanitoba.cs.abdullmm.ui.MainRepl
 
 ```mermaid
 flowchart
-  subgraph **USER AUTHENTICATION**
+  subgraph USER_AUTHENTICATION
     start[[Start]]
     menu[Authentication Menu]
-    createChoice{Create or<br/>Sign In?}
-    
+    createChoice{Create or Sign In?}
+
     createProfile[Create Profile]
     createInput[Input: username]
-    checkDuplicate{Username<br/>exists?}
+    checkDuplicate{Username exists?}
     createSuccess[[Profile Created]]
     createError[[Error: Username taken]]
-    
+
     signIn[Sign In]
     signInput[Input: username]
-    checkExists{Username<br/>exists?}
+    checkExists{Username exists?}
     signSuccess[[Signed In Successfully]]
     signError[[Error: User not found]]
-    
+
     mainMenu[[Main Menu]]
-    
+
     start --> menu
     menu --> createChoice
     createChoice -->|Create| createProfile
     createChoice -->|Sign In| signIn
-    
+
     createProfile --> createInput
     createInput --> checkDuplicate
     checkDuplicate -->|Yes| createError
     checkDuplicate -->|No| createSuccess
     createSuccess --> menu
     createError --> menu
-    
+
     signIn --> signInput
     signInput --> checkExists
     checkExists -->|No| signError
@@ -92,7 +92,7 @@ flowchart
 
 ```mermaid
 flowchart
-  subgraph **ADD ACTIVITY**
+  subgraph ADD_ACTIVITY
     start[[User Signed In]]
     menu[[Main Menu]]
     addActivity[Add Activity]
@@ -100,21 +100,21 @@ flowchart
     noGear[[Error: No Gear]]
     nameInput[Input: Activity Name]
     routeChoice{Route Source?}
-    
+
     routeDuplicate[Duplicate Previous Route]
-    checkActivities{Has Previous<br/>Activities?}
-    selectRoute[Select Route from<br/>Previous Activities]
-    
+    checkActivities{Has Previous Activities?}
+    selectRoute[Select Route from Previous Activities]
+
     routeNew[Create New Route]
-    addPoints[Add Route Points<br/>(X, Y coordinates)]
-    
+    addPoints[Add Route Points - X, Y coordinates]
+
     selectGear[Select Gear to Use]
-    dateInput[Input: Date<br/>(optional)]
-    durationInput[Input: Duration<br/>(minutes)]
+    dateInput[Input: Date - optional]
+    durationInput[Input: Duration - minutes]
     validate{All Valid?}
     createSuccess[[Activity Created]]
-    createError[[Error: Invalid<br/>Parameters]]
-    
+    createError[[Error: Invalid Parameters]]
+
     start --> menu
     menu --> addActivity
     addActivity --> checkGear
@@ -122,21 +122,21 @@ flowchart
     noGear --> menu
     checkGear -->|Yes| nameInput
     nameInput --> routeChoice
-    
+
     routeChoice -->|Duplicate| routeDuplicate
     routeDuplicate --> checkActivities
     checkActivities -->|No| menu
     checkActivities -->|Yes| selectRoute
-    
+
     routeChoice -->|New| routeNew
     routeNew --> addPoints
-    
+
     selectRoute --> selectGear
     addPoints --> selectGear
     selectGear --> dateInput
     dateInput --> durationInput
     durationInput --> validate
-    
+
     validate -->|No| createError
     validate -->|Yes| createSuccess
     createError --> menu
@@ -148,48 +148,48 @@ flowchart
 
 ```mermaid
 flowchart
-  subgraph **FIND ROUTE**
+  subgraph FIND_ROUTE
     start[[User Signed In]]
     menu[[Main Menu]]
     findRoute[Find Route]
     scopeChoice{Search Scope?}
-    
+
     userOnly[Search in My Routes]
     feedBased[Search in My Feed]
-    
-    startInput[Input: Start Coordinates<br/>(X, Y)]
-    endInput[Input: End Coordinates<br/>(X, Y)]
-    validate{Coordinates<br/>Valid?}
-    invalidCoords[[Error: Invalid<br/>Coordinates]]
-    
-    search[Run DFS Pathfinding<br/>Algorithm using Stack]
-    checkResult{Path<br/>Found?}
-    pathFound[[Route Found!<br/>Display Points]]
-    pathNotFound[[Error: No Path<br/>Available]]
-    
-    useRoute{Use Route for<br/>Activity?}
+
+    startInput[Input: Start Coordinates - X, Y]
+    endInput[Input: End Coordinates - X, Y]
+    validate{Coordinates Valid?}
+    invalidCoords[[Error: Invalid Coordinates]]
+
+    search[Run DFS Pathfinding Algorithm using Stack]
+    checkResult{Path Found?}
+    pathFound[[Route Found! Display Points]]
+    pathNotFound[[Error: No Path Available]]
+
+    useRoute{Use Route for Activity?}
     redirectAdd[[Go to Add Activity]]
-    
+
     start --> menu
     menu --> findRoute
     findRoute --> scopeChoice
-    
+
     scopeChoice -->|My Routes| userOnly
     scopeChoice -->|My Feed| feedBased
-    
+
     userOnly --> startInput
     feedBased --> startInput
-    
+
     startInput --> endInput
     endInput --> validate
     validate -->|No| invalidCoords
     invalidCoords --> menu
     validate -->|Yes| search
-    
+
     search --> checkResult
     checkResult -->|No| pathNotFound
     checkResult -->|Yes| pathFound
-    
+
     pathNotFound --> menu
     pathFound --> useRoute
     useRoute -->|No| menu
@@ -202,17 +202,17 @@ flowchart
 
 ```mermaid
 flowchart
-  subgraph **VIEW FEED**
+  subgraph VIEW_FEED
     start[[User Signed In]]
     menu[[Main Menu]]
     viewFeed[View Activity Feed]
-    checkActivities{Activities<br/>in Feed?}
+    checkActivities{Activities in Feed?}
     empty[[Feed is Empty]]
-    list[Display List of<br/>Own + Followed Users<br/>Activities]
+    list[Display List of Own + Followed Users Activities]
     selectActivity{View Details?}
-    
-    detail[[Display Activity<br/>Details and Route]]
-    
+
+    detail[[Display Activity Details and Route]]
+
     start --> menu
     menu --> viewFeed
     viewFeed --> checkActivities
@@ -230,30 +230,30 @@ flowchart
 
 ```mermaid
 flowchart
-  subgraph **FOLLOW USERS**
+  subgraph FOLLOW_USERS
     start[[User Signed In]]
     menu[[Main Menu]]
     followMenu[Follow Menu]
     action{Action?}
-    
+
     follow[Follow User]
-    listUsers[Display Available<br/>Users]
-    selectUser[Select User<br/>to Follow]
-    checkFollowing{Already<br/>Following?}
+    listUsers[Display Available Users]
+    selectUser[Select User to Follow]
+    checkFollowing{Already Following?}
     followSuccess[[Now Following]]
     alreadyFollowing[[Already Following]]
-    
+
     view[View Followed Users]
-    listFollowed[Display Followed<br/>Users]
-    
+    listFollowed[Display Followed Users]
+
     unfollow[Unfollow User]
-    selectUnfollow[Select User<br/>to Unfollow]
+    selectUnfollow[Select User to Unfollow]
     unfollowSuccess[[Unfollowed]]
-    
+
     start --> menu
     menu --> followMenu
     followMenu --> action
-    
+
     action -->|Follow| follow
     follow --> listUsers
     listUsers --> selectUser
@@ -262,11 +262,11 @@ flowchart
     checkFollowing -->|No| followSuccess
     alreadyFollowing --> menu
     followSuccess --> menu
-    
+
     action -->|View| view
     view --> listFollowed
     listFollowed --> menu
-    
+
     action -->|Unfollow| unfollow
     unfollow --> selectUnfollow
     selectUnfollow --> unfollowSuccess
@@ -594,4 +594,3 @@ java -cp target/classes ca.umanitoba.cs.abdullmm.ui.MainRepl
 * Activity statistics and analytics
 * Achievements and badges system
 * Export activities to external formats
-
