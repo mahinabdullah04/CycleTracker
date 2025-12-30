@@ -1,6 +1,6 @@
 ---
 Title: Cycle Tracker - Phase 2
-Author: Md Mahin Abdullah (abdullmm@myumanitoba.ca)(7999890)
+Author: Md Mahin Abdullah
 Date: Fall 2025
 ---
 
